@@ -50,13 +50,17 @@ public class LeastSquares
 		double[] y = { -2.48, -3.75, -4.81, -5.16 };
 		double xk = 11.55;
 
-		int m = 1;
+		int m = 3;
 
 		LeastSquares ls = new LeastSquares(m, x, y);
 		
 		//double[] a = ls.getRootA();
 		
-	
+		double[] pol = ls.getPolynomial();
+		for (double el : pol)
+		{
+			System.out.println(el);
+		}
 		
 //		double[][] coef = ls.getC();
 //		

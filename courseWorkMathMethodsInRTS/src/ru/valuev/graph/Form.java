@@ -47,9 +47,12 @@ public class Form extends JFrame {
 	
 	
 	private boolean isFirstTime = true;
+	
+	private JTextField txtScale;
+	private JTextField txtResize;
 
 	public Form() {
-		setSize(new Dimension(628, 350));
+		setSize(new Dimension(628, 443));
 
 		getContentPane().setBackground(SystemColor.control);
 		getContentPane().setLayout(null);
@@ -77,6 +80,8 @@ public class Form extends JFrame {
 				p.draw(xStart, yMin, xFinal, yMax, null, movingPointX);
 				txtMovingPointX.setText(String.format("%.4f", p.getMovingX()));
 				txtMovingPointY.setText(String.format("%.4f", p.getMovingY()));
+				
+				updateForm();
 			}
 		};
 		panel.addMouseListener(new MouseAdapter() {
@@ -164,6 +169,8 @@ public class Form extends JFrame {
 					//resize *= factor;
 					scale *= factor; 		
 				}
+				
+				updateForm();
 			}
 
 		});
@@ -186,7 +193,7 @@ public class Form extends JFrame {
 			}
 		});
 
-		panel.setBounds(181, 61, 421, 240);
+		panel.setBounds(181, 11, 421, 240);
 		getContentPane().add(panel);
 
 		this.setMinimumSize(this.getSize());
@@ -194,28 +201,53 @@ public class Form extends JFrame {
 		panel.requestFocusInWindow();
 		
 		txtMovingPointX = new JTextField();
-		txtMovingPointX.setBounds(45, 127, 103, 20);
+		txtMovingPointX.setBounds(45, 11, 103, 20);
 		getContentPane().add(txtMovingPointX);
 		txtMovingPointX.setColumns(10);
 		
 		txtMovingPointY = new JTextField();
-		txtMovingPointY.setBounds(45, 158, 103, 20);
+		txtMovingPointY.setBounds(45, 42, 103, 20);
 		getContentPane().add(txtMovingPointY);
 		txtMovingPointY.setColumns(10);
 		
 		JLabel lblX = new JLabel("x =");
-		lblX.setBounds(10, 130, 46, 14);
+		lblX.setBounds(10, 14, 46, 14);
 		getContentPane().add(lblX);
 		
 		JLabel lblY = new JLabel("y = ");
-		lblY.setBounds(10, 161, 46, 14);
+		lblY.setBounds(10, 45, 46, 14);
 		getContentPane().add(lblY);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 120, 80);
-		getContentPane().add(tabbedPane);
+		JLabel lblScale = new JLabel("scale");
+		lblScale.setBounds(10, 86, 46, 14);
+		getContentPane().add(lblScale);
+		
+		txtScale = new JTextField();
+		txtScale.setText("scale");
+		txtScale.setBounds(62, 83, 86, 20);
+		getContentPane().add(txtScale);
+		txtScale.setColumns(10);
+		
+		JLabel lblResize = new JLabel("resize");
+		lblResize.setBounds(10, 121, 46, 14);
+		getContentPane().add(lblResize);
+		
+		txtResize = new JTextField();
+		txtResize.setText("resize");
+		txtResize.setBounds(62, 118, 86, 20);
+		getContentPane().add(txtResize);
+		txtResize.setColumns(10);
 		
 		points = new Point[] { new Point(0, 0)}; 
+		
+		updateForm();
+	}
+
+	private void updateForm()
+	{
+		txtResize.setText(Double.toString(resize));
+		txtScale.setText(Double.toString(scale));
+		
 	}
 
 	private void intializeCordiante() {
@@ -303,11 +335,4 @@ public class Form extends JFrame {
 		panel.repaint();
 		
 	}
-
-//	private void outputCoordinate(double x0, double y0, double x1, double y1) {
-//		txtXstart.setText(String.format("%.4f", x0));
-//		txtYmin.setText(String.format("%.4f", y0));
-//		txtXfinal.setText(String.format("%.4f", x1));
-//		txtYmax.setText(String.format("%.4f", y1));
-//	}
 }
